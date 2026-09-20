@@ -1,0 +1,7 @@
+1, Heitor, 1000
+2, Guilherme, 2000
+3, Suzana, 3000
+4, Ana Júlia, 4000
+5, Helena, 5000
+6, Gustavo, 6000
+7, Isabel, 7000

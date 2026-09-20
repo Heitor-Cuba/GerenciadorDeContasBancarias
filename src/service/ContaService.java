@@ -1,30 +1,52 @@
 package service;
 
-import model.ContaCorrente;
-
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 import exception.SaldoInsuficienteException;
+import model.ContaCorrente;
 
 public class ContaService {
-    public ContaCorrente lerConta(String caminho) throws IOException {
-        List<String> linhas = Files.readAllLines(Paths.get(caminho));
-        String[] dados = linhas.get(0).split(", ");
+    private Map<Integer, ContaCorrente> contas = new HashMap<>();
+    
+    public Map<Integer, ContaCorrente> getContas(){
+        return contas;
+    }
+    
+    public void lerContas(String caminho) throws IOException {
+        try (var linhas = Files.lines(Paths.get(caminho))) {
+            linhas.forEach(linha -> {
+                String[] dados = linha.split(", ");
+
+                int numero = Integer.parseInt(dados[0].trim());
+                String titular = dados[1].trim();
+                double saldo = Double.parseDouble(dados[2].trim());
+
+                ContaCorrente conta = new ContaCorrente(numero, titular, saldo);
+                contas.put(numero, conta);
+            });  
+        }
         
-        int numero = Integer.parseInt(dados[0].trim());
-        String titular = dados[1].trim();
-        double saldo = Double.parseDouble(dados[2].trim());
-        
-        return new ContaCorrente(numero, titular, saldo);
     }
     
     public void sacarValor(ContaCorrente conta, double valor) throws SaldoInsuficienteException {
         conta.sacar(valor);
     }
     
-    public void atualizarConta(ContaCorrente conta, String caminho) throws IOException {
-        String dados = conta.getNumero() + ", " + conta.getTitular() + ", " + conta.getSaldo();
-        Files.write(Paths.get(caminho), dados.getBytes());
+    public void atualizarContas(String caminho) throws IOException {
+        StringBuilder dados = new StringBuilder();
+        
+        for(ContaCorrente conta : contas.values()){
+            dados.append(conta.getNumero())
+                 .append(", ")
+                 .append(conta.getTitular())
+                 .append(", ")
+                 .append(conta.getSaldo())
+                 .append(System.lineSeparator());
+        }
+        
+        Files.write(Paths.get(caminho), dados.toString().getBytes());
     }
 }

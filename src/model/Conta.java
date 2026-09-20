@@ -27,10 +27,12 @@ public abstract class Conta {
 
     public abstract void sacar(double valor) throws SaldoInsuficienteException;
 
-    public void depositar(double valor){
-        if(valor > 0){
-            saldo += valor;
+    public void depositar(double valor) throws SaldoInsuficienteException{
+        if(valor <= 0){
+            throw new SaldoInsuficienteException("O valor deve ser maior que zero.");
         }
+        
+        saldo += valor;
     }
 
     public void imprimirDados(){
