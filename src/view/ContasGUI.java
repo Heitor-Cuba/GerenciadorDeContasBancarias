@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import exception.SaldoInsuficienteException;
 import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 
 import service.ContaService;
 import model.ContaCorrente;
@@ -38,6 +39,17 @@ public class ContasGUI extends javax.swing.JFrame {
                 conta.getSaldo()
             });
         }
+    }
+    
+    public void adicionarContaNaTabela(ContaCorrente conta){
+        DefaultTableModel modelo =
+            (DefaultTableModel) tblContas.getModel();
+        
+        modelo.addRow(new Object[]{
+            conta.getNumero(),
+            conta.getTitular(),
+            conta.getSaldo()
+        });
     }
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ContasGUI.class.getName());
@@ -77,6 +89,7 @@ public class ContasGUI extends javax.swing.JFrame {
         lvlValorDeposito = new javax.swing.JLabel();
         txtValorDeposito = new javax.swing.JTextField();
         btnDepositar = new javax.swing.JButton();
+        btnAdicionarConta = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,7 +131,9 @@ public class ContasGUI extends javax.swing.JFrame {
         lblValorSaque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblValorSaque.setText("Valor para Saque:");
 
+        btnSacar.setBackground(new java.awt.Color(255, 255, 153));
         btnSacar.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnSacar.setForeground(new java.awt.Color(0, 0, 0));
         btnSacar.setText("Sacar");
         btnSacar.addActionListener(this::btnSacarActionPerformed);
 
@@ -148,9 +163,15 @@ public class ContasGUI extends javax.swing.JFrame {
         lvlValorDeposito.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lvlValorDeposito.setText("Valor para depósito:");
 
+        btnDepositar.setBackground(new java.awt.Color(204, 255, 153));
         btnDepositar.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnDepositar.setForeground(new java.awt.Color(0, 0, 0));
         btnDepositar.setText("Depositar");
         btnDepositar.addActionListener(this::btnDepositarActionPerformed);
+
+        btnAdicionarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdicionarConta.setText("Adicionar conta");
+        btnAdicionarConta.addActionListener(this::btnAdicionarContaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,28 +181,31 @@ public class ContasGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(txtTitular)
-                            .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnDepositar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtValorDeposito)
-                            .addComponent(lvlValorDeposito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtValorSaque)
-                            .addComponent(lblValorSaque, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSaldo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTitular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAdicionarConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtValorDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lvlValorDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSacar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtValorSaque, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblValorSaque, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +226,7 @@ public class ContasGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSaldo)
                     .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lvlValorDeposito)
                     .addComponent(lblValorSaque))
@@ -212,8 +236,10 @@ public class ContasGUI extends javax.swing.JFrame {
                     .addComponent(txtValorSaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSacar)
-                    .addComponent(btnDepositar))
+                    .addComponent(btnDepositar)
+                    .addComponent(btnSacar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAdicionarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -242,7 +268,7 @@ public class ContasGUI extends javax.swing.JFrame {
             int linha = tblContas.getSelectedRow();
             tblContas.setValueAt(conta.getSaldo(), linha, 2);
             
-            cs.atualizarContas("contas_atualizadas.txt");
+            cs.atualizarContas("contas.txt");
             
             JOptionPane.showMessageDialog(
                     this,
@@ -304,7 +330,7 @@ public class ContasGUI extends javax.swing.JFrame {
             int linha = tblContas.getSelectedRow();
             tblContas.setValueAt(conta.getSaldo(), linha, 2);
 
-            cs.atualizarContas("contas_atualizadas.txt");
+            cs.atualizarContas("contas.txt");
 
             JOptionPane.showMessageDialog(
                     this,
@@ -334,6 +360,10 @@ public class ContasGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDepositarActionPerformed
 
+    private void btnAdicionarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarContaActionPerformed
+        new AdicionarContaGUI(cs, this).setVisible(true);
+    }//GEN-LAST:event_btnAdicionarContaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -360,6 +390,7 @@ public class ContasGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionarConta;
     private javax.swing.JButton btnDepositar;
     private javax.swing.JButton btnSacar;
     private javax.swing.JScrollPane jScrollPane1;

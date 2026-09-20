@@ -1,7 +1,10 @@
-1, Heitor, 1000
-2, Guilherme, 2000
-3, Suzana, 3000
-4, Ana Júlia, 4000
-5, Helena, 5000
-6, Gustavo, 6000
-7, Isabel, 7000
+1, Grimes, 1000
+2, Kali Uchis, 2000
+3, Lana Del Rey, 3000
+4, Magdalena Bay, 4000
+5, Mitski, 5000
+6, Slayyyter, 6000
+7, Poppy, 7000
+8, Omar Apollo, 8000
+9, FKA Twigs, 9000
+10, Björk, 10000
