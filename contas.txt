@@ -1,10 +1,19 @@
-1, Grimes, 1000
-2, Kali Uchis, 2000
-3, Lana Del Rey, 3000
-4, Magdalena Bay, 4000
-5, Mitski, 5000
-6, Slayyyter, 6000
-7, Poppy, 7000
-8, Omar Apollo, 8000
-9, FKA Twigs, 9000
-10, Björk, 10000
+1, Grimes, 1000.0
+2, Kali Uchis, 2000.0
+3, Lana Del Rey, 3000.0
+4, Magdalena Bay, 4000.0
+5, Mitski, 5000.0
+6, Slayyyter, 6000.0
+7, Poppy, 7000.0
+8, Omar Apollo, 8000.0
+9, FKA Twigs, 9000.0
+10, Björk, 10000.0
+11, Ravyn Lenae, 20000.0
+12, The Slaps, 30000.0
+13, PinkPantheress, 40000.0
+14, Elita, 50000.0
+15, Eartheater, 60000.0
+16, Urias, 70000.0
+17, Janelle Monáe, 80000.0
+18, Arca, 90000.0
+19, Charli xcx, 100000.0

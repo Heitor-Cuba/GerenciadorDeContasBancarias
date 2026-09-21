@@ -46,42 +46,60 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblTitulo" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNumero" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="lblTitular" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="lblSaldo" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnFiltrarSaldo" min="-2" pref="180" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtSaldo" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="txtTitular" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="txtNumero" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnAdicionarConta" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnAdicionarConta" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtValorDeposito" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="btnDepositar" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="lvlValorDeposito" min="-2" pref="150" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lvlValorDeposito" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnSacar" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="txtValorSaque" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="lblValorSaque" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lblValorSaque" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtValorDeposito" pref="150" max="32767" attributes="0"/>
+                          <Component id="btnDepositar" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnSacar" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="txtValorSaque" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnSaldoTotal" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="btnAgruparSaldo" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lblNumero" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblTitular" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblSaldo" alignment="0" pref="100" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtTitular" max="32767" attributes="0"/>
+                                  <Component id="txtNumero" alignment="0" pref="230" max="32767" attributes="0"/>
+                                  <Component id="txtSaldo" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -94,22 +112,31 @@
               <Component id="lblTitulo" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="150" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnFiltrarSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAdicionarConta" alignment="3" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnSaldoTotal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnAgruparSaldo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTitular" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtTitular" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lvlValorDeposito" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblValorSaque" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,10 +149,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDepositar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSacar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSacar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAdicionarConta" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -162,7 +187,7 @@
     <Component class="javax.swing.JLabel" name="lblSaldo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
+          <Font name="Segoe UI" size="13" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Saldo dispon&#xed;vel:"/>
@@ -186,7 +211,7 @@
     <Component class="javax.swing.JLabel" name="lblValorSaque">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
+          <Font name="Segoe UI" size="15" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Valor para Saque:"/>
       </Properties>
@@ -202,7 +227,7 @@
           <Font name="Segoe UI" size="15" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="0" green="66" red="66" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Sacar"/>
       </Properties>
@@ -236,7 +261,7 @@
     <Component class="javax.swing.JLabel" name="lvlValorDeposito">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
+          <Font name="Segoe UI" size="15" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Valor para dep&#xf3;sito:"/>
       </Properties>
@@ -252,7 +277,7 @@
           <Font name="Segoe UI" size="15" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="0" green="66" red="66" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Depositar"/>
       </Properties>
@@ -262,13 +287,52 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnAdicionarConta">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="cc" red="99" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
+          <Font name="Segoe UI" size="15" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Adicionar conta"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarContaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFiltrarSaldo">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Filtrar Maior Que 10mil"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFiltrarSaldoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSaldoTotal">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Calcular Saldo Total"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaldoTotalActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAgruparSaldo">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Agrupar por Saldo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgruparSaldoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
