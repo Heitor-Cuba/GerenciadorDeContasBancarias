@@ -2,9 +2,11 @@ package service;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import exception.SaldoInsuficienteException;
@@ -51,13 +53,6 @@ public class ContaService {
         Files.write(Paths.get(caminho), dados.toString().getBytes());
     }
     
-    public List<ContaCorrente> filtrarContasSaldoAlto(){
-        return contas.values()
-                     .stream()
-                     .filter(conta -> conta.getSaldo() > 10000)
-                     .toList();
-    }
-    
     public double calcularSaldoTotal(){
         return contas.values()
                      .stream()
@@ -77,5 +72,45 @@ public class ContaService {
                              return "Acima de R$10.000";
                          }
                      }));
+    }
+    
+    public List<ContaCorrente> filtrarPorSaldo(){
+        Predicate<ContaCorrente> saldoMaior5000 =
+                conta -> conta.getSaldo() > 5000;
+        
+        return contas.values()
+                     .stream()
+                     .filter(saldoMaior5000)
+                     .toList();
+    }
+    
+    public List<ContaCorrente> filtrarContasPar(){
+        Predicate<ContaCorrente> numeroPar =
+                conta -> conta.getNumero() % 2 == 0;
+        
+        return contas.values()
+                     .stream()
+                     .filter(numeroPar)
+                     .toList();
+    }
+    
+    public List<ContaCorrente> ordenarPorSaldo(){
+        Comparator<ContaCorrente> porSaldo =
+                (conta1, conta2) -> Double.compare(conta2.getSaldo(), conta1.getSaldo());
+        
+        return contas.values()
+                     .stream()
+                     .sorted(porSaldo)
+                     .toList();
+    }
+    
+    public List<ContaCorrente> ordenarPorTitular(){
+        Comparator<ContaCorrente> porTitular =
+                (conta1, conta2) -> conta1.getTitular().compareToIgnoreCase(conta2.getTitular());
+        
+        return contas.values()
+                     .stream()
+                     .sorted(porTitular)
+                     .toList();
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import strategy.TarifaStrategy;
+
 import exception.SaldoInsuficienteException;
 
 public abstract class Conta {
@@ -39,5 +41,9 @@ public abstract class Conta {
         System.out.println("Numero: " + numero);
         System.out.println("Titular: " + titular);
         System.out.println("Saldo: R$" + String.format("%.2f", saldo));
+    }
+    
+    public double calcularTarifa(TarifaStrategy estrategia){
+        return estrategia.calcular(saldo);
     }
 }
