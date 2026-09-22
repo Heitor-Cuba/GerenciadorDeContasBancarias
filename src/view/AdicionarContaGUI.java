@@ -1,7 +1,6 @@
 package view;
 
-import java.io.IOException;
-
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import model.ContaCorrente;
@@ -16,6 +15,7 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
     /**
      * Creates new form AdicionarContaGUI
      * @param cs ContaService utilizado para gerenciar as contas
+     * @param telaPrincipal tela principal utilizada para atualizar a tabela de contas
      */
     public AdicionarContaGUI(ContaService cs, ContasGUI telaPrincipal) {
         initComponents();
@@ -114,7 +114,7 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
             String titular = txtTitular.getText();
             double saldo = Double.parseDouble(txtSaldo.getText());
             
-            if (numero <= 0) {
+            if(numero <= 0){
                 JOptionPane.showMessageDialog(
                         this,
                         "O número da conta deve ser maior que zero.",
@@ -124,7 +124,7 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
                 return;
             }
 
-            if (titular.trim().isEmpty()) {
+            if(titular.trim().isEmpty()){
                 JOptionPane.showMessageDialog(
                         this,
                         "Informe o nome do titular.",
@@ -134,7 +134,7 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
                 return;
             }
 
-            if (saldo < 0) {
+            if(saldo < 0){
                 JOptionPane.showMessageDialog(
                         this,
                         "O saldo não pode ser negativo.",
@@ -144,7 +144,7 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
                 return;
             }
 
-            if (cs.getContas().containsKey(numero)) {
+            if(cs.getContas().containsKey(numero)){
                 JOptionPane.showMessageDialog(
                         this,
                         "Já existe uma conta com esse número.",
@@ -155,13 +155,12 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
             }
 
             ContaCorrente novaConta = new ContaCorrente(numero, titular, saldo);
-            cs.getContas().put(numero, novaConta);
-            cs.atualizarContas("contas.txt");
+            
+            cs.adicionarConta(novaConta);
             
             telaPrincipal.adicionarContaNaTabela(novaConta);
             
             dispose();
-            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
                     this,
@@ -169,7 +168,7 @@ public class AdicionarContaGUI extends javax.swing.JFrame {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE
             );
-        } catch (IOException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(
                     this,
                     "Erro ao salvar a conta: " + e.getMessage(),

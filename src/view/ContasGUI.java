@@ -1,6 +1,6 @@
 package view;
 
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +18,8 @@ public class ContasGUI extends javax.swing.JFrame {
     
     private void carregarConta(){
         try {
-            cs.lerContas("contas.txt");
-        } catch (IOException e) {
+            cs.carregarContasDoBanco();
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(
                     this,
                     "Erro ao carregar as contas: " + e.getMessage(),
@@ -32,10 +32,10 @@ public class ContasGUI extends javax.swing.JFrame {
     private void carregarTabela(){
         Map<Integer, ContaCorrente> contas = cs.getContas();
         
-        javax.swing.table.DefaultTableModel modelo =
-                (javax.swing.table.DefaultTableModel) tblContas.getModel();
+        DefaultTableModel modelo =
+                (DefaultTableModel) tblContas.getModel();
         
-        for (ContaCorrente conta : contas.values()) {
+        for(ContaCorrente conta : contas.values()){
             modelo.addRow(new Object[]{
                 conta.getNumero(),
                 conta.getTitular(),
@@ -101,6 +101,7 @@ public class ContasGUI extends javax.swing.JFrame {
         btnOrdenarTitular = new javax.swing.JButton();
         cmbTarifa = new javax.swing.JComboBox<>();
         btnCalcularTarifa = new javax.swing.JButton();
+        btnExcluirConta = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,9 +181,9 @@ public class ContasGUI extends javax.swing.JFrame {
         btnDepositar.setText("Depositar");
         btnDepositar.addActionListener(this::btnDepositarActionPerformed);
 
-        btnAdicionarConta.setBackground(new java.awt.Color(153, 204, 255));
-        btnAdicionarConta.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        btnAdicionarConta.setForeground(new java.awt.Color(0, 102, 102));
+        btnAdicionarConta.setBackground(new java.awt.Color(102, 204, 255));
+        btnAdicionarConta.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnAdicionarConta.setForeground(new java.awt.Color(0, 0, 0));
         btnAdicionarConta.setText("Adicionar conta");
         btnAdicionarConta.addActionListener(this::btnAdicionarContaActionPerformed);
 
@@ -221,6 +222,12 @@ public class ContasGUI extends javax.swing.JFrame {
         btnCalcularTarifa.setText("Calcular Tarifa");
         btnCalcularTarifa.addActionListener(this::btnCalcularTarifaActionPerformed);
 
+        btnExcluirConta.setBackground(new java.awt.Color(255, 102, 102));
+        btnExcluirConta.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnExcluirConta.setForeground(new java.awt.Color(0, 0, 0));
+        btnExcluirConta.setText("Excluir Conta");
+        btnExcluirConta.addActionListener(this::btnExcluirContaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,7 +254,7 @@ public class ContasGUI extends javax.swing.JFrame {
                                     .addComponent(cmbTarifa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCalcularTarifa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSaldo)
@@ -260,7 +267,9 @@ public class ContasGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtValorSaque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lvlValorDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lvlValorDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnExcluirConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +300,9 @@ public class ContasGUI extends javax.swing.JFrame {
                             .addComponent(lblSaldo)
                             .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAdicionarConta)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdicionarConta)
+                            .addComponent(btnExcluirConta))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -324,7 +335,7 @@ public class ContasGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
-        if(conta == null) {
+        if (conta == null) {
             JOptionPane.showMessageDialog(
                     this,
                     "Selecione uma conta para realizar o saque.",
@@ -345,8 +356,6 @@ public class ContasGUI extends javax.swing.JFrame {
             int linha = tblContas.getSelectedRow();
             tblContas.setValueAt(conta.getSaldo(), linha, 2);
             
-            cs.atualizarContas("contas.txt");
-            
             JOptionPane.showMessageDialog(
                     this,
                     "Saque realizado com sucesso!"
@@ -365,10 +374,10 @@ public class ContasGUI extends javax.swing.JFrame {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE
             );
-        } catch (IOException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Erro ao salvar a conta: " + e.getMessage(),
+                    "Erro ao atualizar o saldo: " + e.getMessage(),
                     "Erro",
                     JOptionPane.ERROR_MESSAGE
             );
@@ -386,7 +395,7 @@ public class ContasGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tblContasMouseClicked
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
-        if(conta == null){
+        if (conta == null) {
             JOptionPane.showMessageDialog(
                     this,
                     "Selecione uma conta para realizar o depósito.",
@@ -399,15 +408,15 @@ public class ContasGUI extends javax.swing.JFrame {
         try {
             double valor = Double.parseDouble(txtValorDeposito.getText());
 
-            conta.depositar(valor);
+            cs.depositarValor(conta, valor);
 
             txtSaldo.setText(String.format("%.2f", conta.getSaldo()));
+            
             txtValorDeposito.setText("");
 
             int linha = tblContas.getSelectedRow();
+            
             tblContas.setValueAt(conta.getSaldo(), linha, 2);
-
-            cs.atualizarContas("contas.txt");
 
             JOptionPane.showMessageDialog(
                     this,
@@ -427,10 +436,10 @@ public class ContasGUI extends javax.swing.JFrame {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE
             );
-        } catch (IOException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Erro ao salvar a conta: " + e.getMessage(),
+                    "Erro ao atualizar o saldo: " + e.getMessage(),
                     "Erro",
                     JOptionPane.ERROR_MESSAGE
             );
@@ -580,6 +589,58 @@ public class ContasGUI extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_btnCalcularTarifaActionPerformed
 
+    private void btnExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirContaActionPerformed
+        if (conta == null) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione uma conta para excluir.",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int confirmacao = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente excluir esta conta?",
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacao != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            cs.removerConta(conta.getNumero());
+
+            int linha = tblContas.getSelectedRow();
+            
+            DefaultTableModel modelo = (DefaultTableModel) tblContas.getModel();
+
+            modelo.removeRow(linha);
+
+            conta = null;
+
+            txtNumero.setText("");
+            txtTitular.setText("");
+            txtSaldo.setText("");
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Conta excluída com sucesso!"
+            );
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Erro ao excluir a conta: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnExcluirContaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -610,6 +671,7 @@ public class ContasGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnAgruparSaldo;
     private javax.swing.JButton btnCalcularTarifa;
     private javax.swing.JButton btnDepositar;
+    private javax.swing.JButton btnExcluirConta;
     private javax.swing.JButton btnFiltrarPar;
     private javax.swing.JButton btnFiltrarSaldo;
     private javax.swing.JButton btnOrdenarSaldo;
