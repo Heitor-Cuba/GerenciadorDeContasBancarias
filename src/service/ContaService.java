@@ -60,6 +60,18 @@ public class ContaService {
         dao.remover(numero);
         contas.remove(numero);
     }
+    
+    public void transferir(int numeroOrigem, int numeroDestino, double valor)
+            throws SQLException {
+
+        dao.transferir(numeroOrigem, numeroDestino, valor);
+
+        ContaCorrente origem = dao.buscarPorNumero(numeroOrigem);
+        ContaCorrente destino = dao.buscarPorNumero(numeroDestino);
+
+        contas.put(numeroOrigem, origem);
+        contas.put(numeroDestino, destino);
+    }
 
     public double calcularSaldoTotal() {
         return contas.values()
@@ -124,4 +136,6 @@ public class ContaService {
                 .sorted(porTitular)
                 .toList();
     }
+    
+    
 }
