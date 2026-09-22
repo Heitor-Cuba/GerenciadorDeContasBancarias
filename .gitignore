@@ -1,3 +1,4 @@
 build/
 dist/
 nbdist/
+src/config/ConfiguracaoBanco.java
